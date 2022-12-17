@@ -45,11 +45,17 @@ export default function Navbar() {
                     </li>
 
                     <li className="nav-item">
-                        <a className="nav-link" href="#/Hackathon">Hackathon</a>
+                        <a className="nav-link" href="#/WXDC">WXDC</a>
                         {/* <Link className="nav-link" to="/CreateSBT">CreateSBT</Link> */}
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#/Hosthackathon">Host Hackathon</a>
+                        <a className="nav-link" href="#/MintXinUSD">MintXinUSD</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="#/Analytics">Analytics</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="#/StackXinUSD">StackXinUSD</a>
                     </li>
 
              
