@@ -3,10 +3,13 @@ import Web3Modal from 'web3modal';
 import WalletConnect from "@walletconnect/web3-provider";
 import detectEthereumProvider from '@metamask/detect-provider'
 import { Contract, ethers } from 'ethers';
-import { ABI, contractAddress } from '../Constants/Constants';
+import { ABI, contractAddress, WXDCABI, WXDCContractAddress } from '../Constants/Constants';
 
 const WXDC = () => {
 
+  const [mintXDCToken, setMintXDCToken] = useState(0)
+  const [burnXDCToken, setBurnXDCToken] = useState(0)
+  
 // ########################################################################
 // ########################################################################
 
@@ -83,11 +86,46 @@ useEffect( () => {
         console.log("address:- ", address)   
     }
 
+    const mintXDCFun = async () => {
+      const signer = provider.getSigner()
+      const contractInstance = new ethers.Contract(WXDCContractAddress, WXDCABI, signer);
+      const mintTx = await contractInstance.mint({value : mintXDCToken})
+      await mintTx.wait();
+      window.alert("Token Minted!")
+    }
+
+    const WithdrawXDC = async() => {
+      const signer = provider.getSigner()
+      const contractInstance = new ethers.Contract(WXDCContractAddress, WXDCABI, signer);
+      const burnTx = await contractInstance.burnTokes(burnXDCToken)
+      await burnTx.wait();
+      window.alert("XDC withdrawal successfuly!")
+
+    }
+
+    const getXDC = (e) => {
+      let m = (e.target.value)
+      let ethersToWei = ethers.utils.parseUnits(m.toString(), "ether");
+      setMintXDCToken(ethersToWei)
+      // console.log("ethersToWei", ethersToWei.toString())
+    }
+    const getWXDC = (e) => {
+      let m = (e.target.value)
+      let ethersToWei = ethers.utils.parseUnits(m.toString(), "ether");
+      setBurnXDCToken(ethersToWei)
+    }
+
     return (
         <div align="center">
 
-            <button onClick={getNum}>Get Num</button>
-            <button onClick={setNum}>Set Num</button>
+          <h1>Mint WXDC</h1>
+          <input onChange={getXDC} type="text" placeholder='Enter Amount of XDC' />
+          <button onClick={mintXDCFun}>Mint WXDC</button>
+
+          <br /> <br />
+          
+          <input onChange={getWXDC} type="text" placeholder='Enter Amount of WXDC' />
+          <button onClick={WithdrawXDC}>Withdraw XDC</button>
 
         </div>
     );
