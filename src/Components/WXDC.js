@@ -7,9 +7,11 @@ import { ABI, contractAddress } from '../Constants/Constants';
 
 const WXDC = () => {
 
+// ########################################################################
+// ########################################################################
+
   const [provider, setProvider] = useState(null)
   const [address, setAddress] = useState(null)
-
 
   const web3Modal = new Web3Modal({
     cacheProvider: true,
@@ -52,10 +54,12 @@ const onConnect = async () => {
       console.log("err", err)
   }
 }
-
 useEffect( () => {
     onConnect()
 } ,[])
+
+// ########################################################################
+// ########################################################################
 
 
     const getNum = async() => {
@@ -75,16 +79,12 @@ useEffect( () => {
 
         const contractInstance = new ethers.Contract(contractAddress, ABI, signer)
 
-        const set =await contractInstance.setNum(65);
-        console.log("address:- ", address)
-        // const p = await set.wait()
-        // console.log("Done")
-        
+        const set = await contractInstance.setNum(65);
+        console.log("address:- ", address)   
     }
 
     return (
         <div align="center">
-            <h3>How to connect XDC Pay wallet (chrome extension) with  Web3Modal</h3>
 
             <button onClick={getNum}>Get Num</button>
             <button onClick={setNum}>Set Num</button>
