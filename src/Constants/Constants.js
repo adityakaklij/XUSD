@@ -42,9 +42,12 @@ export const ABI = [
 ]
 
 
-export const XinUSDContractAddress = "0x8F5825Ead24ae6a874F5AD7C03C9ef820a3D6c72"
-export const WXDCContractAddress ="0x60c04c84743C12CCBc0Aa414f175dA6a94D88A20"
-export const XinUSDVaultAddress = "0xfD0391E6172aEf9DB6dbc0F0c520E25259fE091d"
+export const WXDCContractAddress ="0x49dC06eb9ee5f3BDfc3Cb8181486D3a0B34173d0"  
+export const XinUSDVaultAddress = "0xB5d78CC47362f26b7FB7639694aC91F68B1a36B8" 
+export const XinUSDContractAddress = "0xB6174660e1c67af355AE910d53e68C9f2f89aE39"
+// export const XinUSDContractAddress = "0x8F5825Ead24ae6a874F5AD7C03C9ef820a3D6c72" // TestNet
+// export const WXDCContractAddress ="0x60c04c84743C12CCBc0Aa414f175dA6a94D88A20" // TestNet
+// export const XinUSDVaultAddress = "0xfD0391E6172aEf9DB6dbc0F0c520E25259fE091d" // TestNet
 
 export const WXDCABI = [
 	{
