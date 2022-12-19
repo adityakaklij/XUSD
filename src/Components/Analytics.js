@@ -3,14 +3,18 @@ import { ethers } from 'ethers'
 import Web3Modal from 'web3modal';
 import WalletConnect from "@walletconnect/web3-provider";
 import detectEthereumProvider from '@metamask/detect-provider'
-import { XinUSDABI, XinUSDContractAddress } from '../Constants/Constants';
+import { XinUSDABI, XinUSDContractAddress, XinUSDVaultABI, XinUSDVaultAddress } from '../Constants/Constants';
 
 function Analytics() {
 
-    const [totalSupply, setTotalSupply] = useState(0)
+    const [totalSupply, setTotalSupply] = useState(0);
+    const [totalSurplusFund, setTotalSurplusFund] = useState(0);
+    const [userLiquidityData , setUserLiquidityData] = useState(0);
+    const [renderData, setRenderData] = useState(false)
 // ########################################################################
 const [provider, setProvider] = useState(null)
 const [address, setAddress] = useState(null)
+// const [signer, setSigner] = useState(null)
 
 const web3Modal = new Web3Modal({
   cacheProvider: true,
@@ -48,14 +52,16 @@ try {
     const instance = await web3Modal.connect();
     const providerConnect = new ethers.providers.Web3Provider(instance);
     setProvider(providerConnect)
+    // setSigner(providerConnect.getSigner())
+    // renderDetails()
 
 } catch (err) {
     console.log("err", err)
 }
 }
+
 useEffect( () => {
    onConnect()
-//   circulatingSupply()
 } ,[])
 // useEffect(() => {
 //     circulatingSupply()
@@ -72,6 +78,9 @@ const userLiquidity = async() => {
     console.log(address)
     // await addLiquidityTx.wait();
     console.log(addLiquidityTx.toString())
+    const ethValue = ethers.utils.formatEther(addLiquidityTx.toString());
+
+    setUserLiquidityData(ethValue)
 }
 
 const circulatingSupply = async() => {
@@ -87,19 +96,43 @@ const circulatingSupply = async() => {
 }
 
 const SurplusFunds = async() => {
-    
+    const signer = provider.getSigner()
+    const contracInstance = new ethers.Contract(XinUSDContractAddress, XinUSDABI, signer)
+    const availableFunds = await contracInstance.balanceOf(XinUSDVaultAddress)   
+    setTotalSurplusFund(availableFunds.toString())
+    console.log(availableFunds.toString())
 }
+
+const renderDetails = async () => {
+    setRenderData(true)
+    userLiquidity()
+    circulatingSupply()
+    SurplusFunds()
+}
+
+if (renderData) {
+    return(
+        <div>
+            <br /><br />
+        <h2>Total Value locked in Vault:- </h2>
+        <h2>Surplus Funds {totalSurplusFund} WXDC</h2>
+        <h2>Total XinUSD supply:- {totalSupply}XinUSD</h2>
+        <h2>Your Liquidity {userLiquidityData} WXDC</h2>
+
+        </div>
+    )
+}
+
+else{
 
   return (
     <div>
-        <h2>Total Value locked in Vault:- </h2>
-        <h2>Surplus Funds</h2>
-        <h2>Total XinUSD supply:- {totalSupply}</h2>
-        <button onClick={userLiquidity}>Get Liquidity</button>
-        <button onClick={circulatingSupply}>circulatingSupply</button>
+        <button onClick={renderDetails}>getDetails</button>
 
     </div>
   )
+
+    }
 }
 
 export default Analytics

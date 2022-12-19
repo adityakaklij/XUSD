@@ -7,6 +7,9 @@ import { XinUSDABI, XinUSDContractAddress } from '../Constants/Constants';
 
 function MintXinUSD() {
   const [currentXDCPrice, setCurrentXDCPrice] = useState(0)
+  const [currentXDCPrice2, setCurrentXDCPrice2] = useState("0")
+  const [xinUSDToken, setXinUSDToken] = useState(0)
+
 
   // ########################################################################
 const [provider, setProvider] = useState(null)
@@ -45,9 +48,11 @@ const web3Modal = new Web3Modal({
 
 const onConnect = async () => {
 try {
+
     const instance = await web3Modal.connect();
     const providerConnect = new ethers.providers.Web3Provider(instance);
     setProvider(providerConnect)
+    url()
 
 } catch (err) {
     console.log("err", err)
@@ -62,25 +67,41 @@ useEffect( () => {
 
   const mintXinUsdFun = async() => {
     await url()
-    const signer = provider.getSigner()
-    // const address = await signer.getAddress();
-    // setAddress(address)
+    const signer = provider.getSigner() 
+
+    console.log("CurrentXDCPrice", currentXDCPrice)
+
     const contractInstance = new ethers.Contract(XinUSDContractAddress,XinUSDABI , signer);
-    const mintValue = ( parseFloat(1) / parseFloat(currentXDCPrice) * 2 ) ;
-    console.log("mintValue ",mintValue)
-    let ethersToWei = ethers.utils.parseUnits(mintValue, "ether");
-    console.log("ethersToWei", ethersToWei)
-    // const mintXinTx = await contractInstance.mint(ethersToWei );
+    // const mintValue = ( parseFloat(1) / parseFloat(currentXDCPrice) * 2 ) ;
+    // console.log("mintValue ",mintValue)
+    // let ethersToWei = ethers.utils.parseUnits(mintValue.toString(), "ether");
+    // console.log("ethersToWei", ethersToWei.toString())
+    // setCurrentXDCPrice( ethersToWei)
+    const p = (currentXDCPrice * xinUSDToken)
+    let ethersToWei = ethers.utils.parseUnits(p.toString(), "ether");
+    const mintXinTx = await contractInstance.mint(ethersToWei);
+
     // await mintXinTx.wait();
-    // window.alert("XinUSD minted!")
+    window.alert("XinUSD minted!")
   }
 
   const url = async () => {
-    fetch("https://api.coingecko.com/api/v3/simple/price?ids=xdce-crowd-sale&vs_currencies=usd")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data["xdce-crowd-sale"]["usd"]);
-        setCurrentXDCPrice(data["xdce-crowd-sale"]["usd"]);
+    await fetch("https://api.coingecko.com/api/v3/simple/price?ids=xdce-crowd-sale&vs_currencies=usd") .then((res) => res.json()) .then((data) => {
+        // console.log(data["xdce-crowd-sale"]["usd"]);
+        
+        const mintValue = ( parseFloat(1) / parseFloat(data["xdce-crowd-sale"]["usd"]) * 2 ) ;
+        // console.log(mintValue)
+        
+        // console.log("ethersToWei",ethersToWei.toString())
+        // setCurrentXDCPrice(ethersToWei.toString());
+        setCurrentXDCPrice(mintValue);
+
+        
+        // console.log("mintValue ",mintValue)
+        // setCurrentXDCPrice(ethersToWei)
+        // let ethersToWei = ethers.utils.parseUnits(mintValue.toString(), "ether");
+        // setCurrentXDCPrice2((mintValue).toFixed(3))
+
         return(data["xdce-crowd-sale"]["usd"]);
   
       })
@@ -89,11 +110,19 @@ useEffect( () => {
       });
   };
 
+  const getWXDC = (e) => {
+    let m = (e.target.value)
+    setXinUSDToken(m)
+  }
+
   return (
     <div>
         <h1>MintXinUSD</h1>
-        <button onClick={url}>get data</button>
+        {/* <button onClick={url}>get data</button> */}
+        <br /><br />
+        <input onChange={getWXDC} type="text" placeholder='Enter Amount of WXDC' />
         <button onClick={mintXinUsdFun}>Mint XinUSD</button>
+        <h2>Current XinUSD costs {((currentXDCPrice).toFixed(3)).toString()} WXDC</h2>
     </div>
   )
 }

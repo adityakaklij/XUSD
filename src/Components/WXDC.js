@@ -9,7 +9,7 @@ const WXDC = () => {
 
   const [mintXDCToken, setMintXDCToken] = useState(0)
   const [burnXDCToken, setBurnXDCToken] = useState(0)
-  
+
 // ########################################################################
 // ########################################################################
 

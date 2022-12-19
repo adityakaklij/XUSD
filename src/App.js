@@ -65,9 +65,9 @@ const onConnect = async () => {
 
 if(address == null) {
     return(
-      <>
-        <button onClick={onConnect}>Connect</button>
-      </>
+      <div  align="center">
+        <button  onClick={onConnect}>Connect</button>
+      </div>
     )
 }
   
