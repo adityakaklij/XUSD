@@ -5,10 +5,13 @@ function Home() {
   
   return (
     <div>
-      <h1>XDC backed Stable coin</h1>
-      <h2>Collateralization ratio:- 200%</h2>
-      <h2>Surplus Funds</h2>
-      <h2>Vault</h2>
+      <br />
+      <br />
+      <h1>XinUSD</h1>
+      <br />
+      <h2>A Decentralise Stable-Coin pegged by XDC</h2>
+      <h2>Over-Collateralised Stable Coin</h2>
+      <h2>Decentralise Governance</h2>
     </div>
   )
 }

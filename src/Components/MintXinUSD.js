@@ -117,12 +117,14 @@ useEffect( () => {
 
   return (
     <div>
+      <br />
         <h1>MintXinUSD</h1>
         {/* <button onClick={url}>get data</button> */}
         <br /><br />
         <input onChange={getWXDC} type="text" placeholder='Enter Amount of WXDC' />
-        <button onClick={mintXinUsdFun}>Mint XinUSD</button>
-        <h2>Current XinUSD costs {((currentXDCPrice).toFixed(3)).toString()} WXDC</h2>
+        <button class="btn btn-primary" onClick={mintXinUsdFun}>Mint XinUSD</button>
+        <br /> <br />
+        <h3>Current XinUSD costs {((currentXDCPrice).toFixed(3)).toString()} WXDC</h3>
     </div>
   )
 }

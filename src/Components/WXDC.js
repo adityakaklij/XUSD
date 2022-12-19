@@ -118,14 +118,16 @@ useEffect( () => {
     return (
         <div align="center">
 
+          <br /><br />
           <h1>Mint WXDC</h1>
+          <br /><br />
           <input onChange={getXDC} type="text" placeholder='Enter Amount of XDC' />
-          <button onClick={mintXDCFun}>Mint WXDC</button>
+          <button class="btn btn-primary"  onClick={mintXDCFun}>Mint WXDC</button>
 
-          <br /> <br />
+          <br /> <br /> <br />
           
-          <input onChange={getWXDC} type="text" placeholder='Enter Amount of WXDC' />
-          <button onClick={WithdrawXDC}>Withdraw XDC</button>
+          <input  onChange={getWXDC} type="text" placeholder='Enter Amount of WXDC' />
+          <button class="btn btn-primary" onClick={WithdrawXDC}>Withdraw XDC</button>
 
         </div>
     );

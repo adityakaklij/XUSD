@@ -105,12 +105,12 @@ useEffect( () => {
       <h4>Collatralized Ratio: 200%</h4>
 
       <input onChange={getWXDC2} type="text" placeholder='Enter Amount of XDC' />
-      <button onClick={addLiquidityFun}>Add Liquidity</button>
+      <button class="btn btn-primary" onClick={addLiquidityFun}>Add Liquidity</button>
       
       <br /> <br />
       
       <input onChange={getWXDC} type="text" placeholder='Enter Amount of XDC' />
-      <button onClick={removeLiquidityFun}>Remove Liquidity</button>
+      <button class="btn btn-primary" onClick={removeLiquidityFun}>Remove Liquidity</button>
     </>
     
   )

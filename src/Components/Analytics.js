@@ -113,11 +113,12 @@ const renderDetails = async () => {
 if (renderData) {
     return(
         <div>
-            <br /><br />
-        <h2>Total Value locked in Vault:- </h2>
-        <h2>Surplus Funds {totalSurplusFund} WXDC</h2>
-        <h2>Total XinUSD supply:- {totalSupply}XinUSD</h2>
-        <h2>Your Liquidity {userLiquidityData} WXDC</h2>
+            <br /><br /><br />
+
+        {/* <h2>Total Value locked in Vault:- </h2> */}
+        <h3>Surplus Funds {totalSurplusFund} WXDC</h3>
+        <h3>Total XinUSD supply:- {totalSupply}XinUSD</h3>
+        <h3>Your Liquidity {userLiquidityData} WXDC</h3>
 
         </div>
     )
@@ -127,7 +128,7 @@ else{
 
   return (
     <div>
-        <button onClick={renderDetails}>getDetails</button>
+        <button class="btn btn-primary" onClick={renderDetails}>getDetails</button>
 
     </div>
   )

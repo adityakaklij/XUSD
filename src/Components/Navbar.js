@@ -1,6 +1,7 @@
 import React, { useState , useEffect} from 'react'
 import { ethers } from 'ethers';
 import "../App.css"
+import '../Css/Navbar.css'
 // import '../CSS/Navbar.css'
 
 
@@ -27,7 +28,7 @@ export default function Navbar() {
 
     <div>
         {/* <nav className="navbar navbar-expand-lg navbar-dark bg-dark"> */}
-        <nav className="navbar navbar-expand-lg  ">
+        <nav className="navbar navbar-expand-lg bg-light ">
             <div className="container-fluid">
 
                 {/* <a className="navbar-brand" href="/">Navbar</a> */}
@@ -52,10 +53,10 @@ export default function Navbar() {
                         <a className="nav-link" href="#/MintXinUSD">MintXinUSD</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#/Analytics">Analytics</a>
+                        <a className="nav-link" href="#/StackXinUSD">StackXinUSD</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#/StackXinUSD">StackXinUSD</a>
+                        <a className="nav-link" href="#/Analytics">Analytics</a>
                     </li>
 
              
